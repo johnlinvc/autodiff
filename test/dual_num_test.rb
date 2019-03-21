@@ -37,7 +37,7 @@ describe Autodiff::DualNum do
       dd.real.must_equal(dual.real * dual2.real)
     end
 
-    it "should the epsilon part as r1*e2 + r2*e1" do
+    it "should have the epsilon part as r1*e2 + r2*e1" do
       dd = dual * dual2
       dd.epsilon.must_equal(dual.real * dual2.epsilon + dual2.real * dual.epsilon)
     end
