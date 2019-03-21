@@ -1,5 +1,12 @@
 require "autodiff/version"
+require "autodiff/dual_num"
 
 module Autodiff
-  # Your code goes here...
+
+
+  module_function
+  def gradient(at, &fun)
+    at
+  end
+
 end
