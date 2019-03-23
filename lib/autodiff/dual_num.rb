@@ -1,5 +1,19 @@
 module Autodiff
 
+  module DualNumConvertible
+    def dual_op(op)
+      orig_op = "predual_#{op.to_s}".to_sym
+      alias_method orig_op, op
+      define_method(op) { |other|
+        if other.kind_of?(Autodiff::DualNum)
+          self.to_dual.public_send(op, other)
+        else
+          self.public_send(orig_op, other)
+        end
+      }
+    end
+  end
+
   class DualNum < Numeric
     attr :real, :epsilon
     def initialize(n, e=0)
@@ -48,3 +62,4 @@ class Numeric
   end
 
 end
+

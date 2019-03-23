@@ -1,6 +1,7 @@
 require "autodiff/version"
 require "autodiff/dual_num"
 require "autodiff/numeric"
+require "autodiff/math"
 
 module Autodiff
 

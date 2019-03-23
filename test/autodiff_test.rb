@@ -39,4 +39,8 @@ class AutodiffTest < Minitest::Test
   def test_gradient_can_handle_x_2_minus_x_3
     assert_equal -8, Autodiff.gradient(2) { |x| x*x - x*x*x}
   end
+
+  def test_gradient_can_do_sin
+    assert_equal 1, Autodiff.gradient(0) { |x| Math.sin(x)}
+  end
 end
