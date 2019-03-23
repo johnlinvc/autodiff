@@ -19,10 +19,15 @@ module Autodiff
     def initialize(n, e=0)
       @real = n
       @epsilon = e
+      self.freeze
     end
 
     def to_dual
       self
+    end
+
+    def to_one_epsilon
+      Autodiff::DualNum.new(self.real, 1)
     end
 
     def +(other)
@@ -41,6 +46,10 @@ module Autodiff
       r = @real * other.real
       e = @real * other.epsilon + @epsilon * other.real
       self.class.new(r, e)
+    end
+
+    def to_float
+      real
     end
 
   end

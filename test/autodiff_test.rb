@@ -46,4 +46,8 @@ class AutodiffTest < Minitest::Test
   def test_gradient_can_do_cos
     assert_equal -1, Autodiff.gradient(Math::PI/2) { |x| Math.cos(x)}
   end
+
+  def test_gradient_can_handle_x_mul_y
+    assert_equal [3,2], Autodiff.gradient([2,3]) { |x, y|x * y }
+  end
 end
