@@ -27,5 +27,12 @@ module Math
       Autodiff::DualNum.new(r, e)
     end
 
+    dual_method(:cos)
+    def dual_cos(n)
+      r = cos(n.real)
+      e = -sin(n.real) * n.epsilon
+      Autodiff::DualNum.new(r, e)
+    end
+
   end
 end
