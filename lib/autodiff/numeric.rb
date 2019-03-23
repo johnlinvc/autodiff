@@ -17,3 +17,9 @@ class Integer
   dual_op(:+)
   dual_op(:-)
 end
+
+class Float
+  extend DualNumConvertible
+  dual_op(:+)
+  dual_op(:-)
+end
