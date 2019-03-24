@@ -32,5 +32,10 @@ module Math
       -sin(n.real) * n.epsilon
     end
 
+    dual_method(:tan)
+    def dual_tan(n)
+      ((1/cos(n.real)) ** 2) * n.epsilon
+    end
+
   end
 end
