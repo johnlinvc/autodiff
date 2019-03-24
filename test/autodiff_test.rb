@@ -59,6 +59,10 @@ class AutodiffTest < Minitest::Test
     assert_in_epsilon 2, Autodiff.gradient(0.5) { |x| Math.log(x)}
   end
 
+  def test_gradient_can_do_exp
+    assert_in_epsilon Math::E, Autodiff.gradient(1) { |x| Math.exp(x)}
+  end
+
   def test_gradient_can_handle_x_mul_y
     assert_equal [3,2], Autodiff.gradient([2,3]) { |x, y|x * y }
   end

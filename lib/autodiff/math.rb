@@ -42,5 +42,10 @@ module Math
       1 / n.real / log(base.real) * n.epsilon
     end
 
+    dual_method(:exp)
+    def dual_exp(n)
+      exp(n.real) * n.epsilon
+    end
+
   end
 end

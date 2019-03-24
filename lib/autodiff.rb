@@ -16,6 +16,7 @@ module Autodiff
     end
   end
 
+  # TODO: add ability to raise when a not supported math func is called
   module_function
   def gradient(at, &fun)
     if at_ary = Array.try_convert(at)
