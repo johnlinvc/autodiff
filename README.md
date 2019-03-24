@@ -1,8 +1,29 @@
 # Autodiff
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/autodiff`. To experiment with that code, run `bin/console` for an interactive prompt.
+Calculating gradient or differential is a very common task when working in Math heavy field like Machine Learning. But deriving gradient by hand is time-consuming and error-prone.
 
-TODO: Delete this and the text above, and describe your gem
+Automatic Differentiation(AD) can calculate gradient of arbitrary function automatically. AD is efficient(for human) and correct(without human error).
+
+## Usage
+
+
+```
+require 'autodiff'
+# Calculate differential of a function
+# df/dx = 3*(x**2)
+Autodiff.gradient(2) { |x| x**3} # 12  
+
+# Calculate gradient of a function
+# df/dx = y, df/dy = x
+Autodiff.gradient([2,3]) { |x, y| x * y } # [3,2]
+
+
+# Calculate gradient of a function that is not in simple math form
+# same as 20x+30y
+Autodiff.gradient([1, 1]) {|x,y| 10.times.reduce(0){|acc, n| acc + 2*x + 3*y} } # [20, 30]
+
+```
+
 
 ## Installation
 
@@ -20,9 +41,6 @@ Or install it yourself as:
 
     $ gem install autodiff
 
-## Usage
-
-TODO: Write usage instructions here
 
 ## Development
 

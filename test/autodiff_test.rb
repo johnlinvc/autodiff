@@ -21,6 +21,10 @@ class AutodiffTest < Minitest::Test
     assert_equal -1, Autodiff.gradient(0) { |x| 1 - x }
   end
 
+  def test_gradient_can_do_1_mul_x
+    assert_equal 1, Autodiff.gradient(0) { |x| 1 * x }
+  end
+
   def test_gradient_can_do_1_point_5_minus_x
     assert_equal -1, Autodiff.gradient(0) { |x| 1.5 - x }
   end
@@ -65,5 +69,10 @@ class AutodiffTest < Minitest::Test
 
   def test_gradient_can_handle_x_mul_y
     assert_equal [3,2], Autodiff.gradient([2,3]) { |x, y|x * y }
+  end
+
+  def test_gradient_can_handle_compounded_2d_method
+    actual = Autodiff.gradient([20, 30]) {|x,y| 10.times.reduce(0){|acc, n| acc + 2 * x + 3 * y} }
+    assert_equal [20,30], actual
   end
 end
