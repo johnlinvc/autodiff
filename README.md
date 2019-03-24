@@ -1,5 +1,7 @@
 # Autodiff
 
+*Work In Progress*
+
 Calculating gradient or differential is a very common task when working in Math heavy field like Machine Learning. But deriving gradient by hand is time-consuming and error-prone.
 
 Automatic Differentiation(AD) can calculate gradient of arbitrary function automatically. AD is efficient(for human) and correct(without human error).
@@ -24,6 +26,13 @@ Autodiff.gradient([1, 1]) {|x,y| 10.times.reduce(0){|acc, n| acc + 2*x + 3*y} } 
 
 ```
 
+## Features
+
+current supported operators
+- +, -, *, /
+- sin, cos, tan, log
+
+Goal is to add all Numeric & Math functions
 
 ## Installation
 
