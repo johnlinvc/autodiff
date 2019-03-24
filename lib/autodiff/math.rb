@@ -8,7 +8,10 @@ module DualNumWrappable
     define_method(meth) { |*args|
       if args.any?{ |arg| arg.kind_of?(Autodiff::DualNum)}
         dual_args = args.map(&:to_dual)
-        self.public_send(dual_meth, *dual_args)
+        epsilon_coef = self.public_send(dual_meth, *dual_args)
+        real_args = dual_args.map(&:to_float)
+        r = self.public_send(orig_meth, *real_args)
+        Autodiff::DualNum.new(r, epsilon_coef)
       else
         self.public_send(orig_meth, *args)
       end
@@ -20,18 +23,13 @@ module Math
   class << self
     extend(DualNumWrappable)
     dual_method(:sin)
-
     def dual_sin(n)
-      r = sin(n.real)
-      e = cos(n.real) * n.epsilon
-      Autodiff::DualNum.new(r, e)
+      cos(n.real) * n.epsilon
     end
 
     dual_method(:cos)
     def dual_cos(n)
-      r = cos(n.real)
-      e = -sin(n.real) * n.epsilon
-      Autodiff::DualNum.new(r, e)
+      -sin(n.real) * n.epsilon
     end
 
   end
