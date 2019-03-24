@@ -5,27 +5,27 @@ require "autodiff/math"
 
 module Autodiff
 
+  private
+  module_function
+  def real_ary_to_dual_gradient_mat(ary)
+    dual_ary = ary.map{ |v|  v.to_dual }
+    dual_ary.size.times.map do |i|
+      dual_ary.map.each_with_index do |v, j|
+        i==j ? v.to_one_epsilon : v
+      end
+    end
+  end
+
   module_function
   def gradient(at, &fun)
-    if tmp_at = Array.try_convert(at)
-      dual_at = tmp_at.map{ |v|  v.to_dual }
-      dual_at_mat = dual_at.size.times.map do |i|
-        dual_at.map.each_with_index do |v, j|
-          if i==j
-            v.to_one_epsilon
-          else
-            v
-          end
-        end
-      end
+    if at_ary = Array.try_convert(at)
+      dual_at_mat = real_ary_to_dual_gradient_mat(at_ary)
       gradient_ary = dual_at_mat.map do |row|
         fun.(*row)
       end
       gradient_ary.map(&:epsilon)
     else
-      dual_at = DualNum.new(at, 1)
-      res = fun.(dual_at)
-      res.epsilon
+      gradient([at], &fun)[0]
     end
   end
 

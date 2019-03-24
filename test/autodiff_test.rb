@@ -33,6 +33,10 @@ class AutodiffTest < Minitest::Test
     assert_equal 12, Autodiff.gradient(2) { |x| x*x*x}
   end
 
+  def test_gradient_can_handle_x_**_3
+    assert_equal 12, Autodiff.gradient(2) { |x| x**3}
+  end
+
   def test_gradient_can_handle_x_2_plus_x_3
     assert_equal 16, Autodiff.gradient(2) { |x| x*x + x*x*x}
   end

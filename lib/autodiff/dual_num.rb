@@ -48,6 +48,12 @@ module Autodiff
       self.class.new(r, e)
     end
 
+    def **(other)
+      r = @real ** other.real
+      e = other.real * (@real ** (other.real - 1)) * @epsilon
+      self.class.new(r, e)
+    end
+
     def to_float
       real
     end
