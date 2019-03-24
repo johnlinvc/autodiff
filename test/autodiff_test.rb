@@ -25,6 +25,10 @@ class AutodiffTest < Minitest::Test
     assert_equal 1, Autodiff.gradient(0) { |x| 1 * x }
   end
 
+  def test_gradient_can_do_1_div_x
+    assert_equal -0.25, Autodiff.gradient(2) { |x| 1 / x }
+  end
+
   def test_gradient_can_do_1_point_5_minus_x
     assert_equal -1, Autodiff.gradient(0) { |x| 1.5 - x }
   end

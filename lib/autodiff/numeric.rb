@@ -5,6 +5,7 @@ class Integer
   dual_op(:+)
   dual_op(:-)
   dual_op(:*)
+  dual_op(:/)
 end
 
 class Float
@@ -12,4 +13,5 @@ class Float
   dual_op(:+)
   dual_op(:-)
   dual_op(:*)
+  dual_op(:/)
 end

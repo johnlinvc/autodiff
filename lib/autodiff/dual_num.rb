@@ -48,6 +48,14 @@ module Autodiff
       self.class.new(r, e)
     end
 
+    # do tmp = 1/other then do self * tmp
+    def /(other)
+      r = 1.0 / other.real
+      e = - other.epsilon.to_f / (other.real ** 2)
+      tmp = self.class.new(r, e)
+      self * tmp
+    end
+
     def **(other)
       r = @real ** other.real
       e = other.real * (@real ** (other.real - 1)) * @epsilon
