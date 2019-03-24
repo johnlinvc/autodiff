@@ -37,5 +37,10 @@ module Math
       ((1/cos(n.real)) ** 2) * n.epsilon
     end
 
+    dual_method(:log)
+    def dual_log(n, base=Math::E.to_dual)
+      1 / n.real / log(base.real) * n.epsilon
+    end
+
   end
 end

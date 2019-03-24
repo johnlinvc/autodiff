@@ -55,6 +55,10 @@ class AutodiffTest < Minitest::Test
     assert_in_epsilon 2, Autodiff.gradient(Math::PI/4) { |x| Math.tan(x)}
   end
 
+  def test_gradient_can_log
+    assert_in_epsilon 2, Autodiff.gradient(0.5) { |x| Math.log(x)}
+  end
+
   def test_gradient_can_handle_x_mul_y
     assert_equal [3,2], Autodiff.gradient([2,3]) { |x, y|x * y }
   end
