@@ -48,6 +48,7 @@ class AutodiffTest < Minitest::Test
   def test_gradient_can_handle_x_2_plus_x_3
     assert_equal 16, Autodiff.gradient(2) { |x| x*x + x*x*x}
   end
+
   def test_gradient_can_handle_x_2_minus_x_3
     assert_equal -8, Autodiff.gradient(2) { |x| x*x - x*x*x}
   end
@@ -55,6 +56,7 @@ class AutodiffTest < Minitest::Test
   def test_gradient_can_do_sin
     assert_equal 1, Autodiff.gradient(0) { |x| Math.sin(x)}
   end
+
   def test_gradient_can_do_cos
     assert_equal -1, Autodiff.gradient(Math::PI/2) { |x| Math.cos(x)}
   end
@@ -73,6 +75,16 @@ class AutodiffTest < Minitest::Test
 
   def test_gradient_can_handle_x_mul_y
     assert_equal [3,2], Autodiff.gradient([2,3]) { |x, y|x * y }
+  end
+
+  def assert_ary_in_delta(expected, actual)
+    expected.zip(actual).each { |e,a|
+      assert_in_delta e, a
+    }
+  end
+
+  def test_gradient_can_do_x_cos_y
+    assert_ary_in_delta [-1,0], Autodiff.gradient([2,Math::PI]) { |x, y|x * Math.cos(y) }
   end
 
   def test_gradient_can_handle_compounded_2d_method

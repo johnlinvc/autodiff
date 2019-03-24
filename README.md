@@ -19,6 +19,9 @@ Autodiff.gradient(2) { |x| x**3} # 12
 # df/dx = y, df/dy = x
 Autodiff.gradient([2,3]) { |x, y| x * y } # [3,2]
 
+# Calculate gradient with triangular function
+Autodiff.gradient([2,Math::PI]) { |x, y|x * Math.cos(y) }
+# [-1.0, -2.4492935982947064e-16] with floating point error
 
 # Calculate gradient of a function that is not in simple math form
 # same as 20x+30y
