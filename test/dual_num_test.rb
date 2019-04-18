@@ -44,4 +44,11 @@ describe Autodiff::DualNum do
 
   end
 
+  describe "#<=>" do
+    it "should compare the real part" do
+      cmp_result = dual <=> 55
+      cmp_result.must_equal(0)
+    end
+  end
+
 end

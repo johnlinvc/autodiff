@@ -66,6 +66,10 @@ module Autodiff
       real
     end
 
+    def <=>(other)
+      @real <=> other.real
+    end
+
   end
 
 end
