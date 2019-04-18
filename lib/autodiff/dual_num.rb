@@ -15,6 +15,7 @@ module Autodiff
   end
 
   class DualNum < Numeric
+    include Comparable
     attr :real, :epsilon
     def initialize(n, e=0)
       @real = n

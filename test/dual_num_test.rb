@@ -49,6 +49,24 @@ describe Autodiff::DualNum do
       cmp_result = dual <=> 55
       cmp_result.must_equal(0)
     end
+    it "should compare the real part with num on left" do
+      cmp_result = 55 <=> dual
+      cmp_result.must_equal(0)
+    end
+  end
+
+  describe "#>" do
+
+    it "should compare the real part" do
+      cmp_result = dual > 54
+      cmp_result.must_equal(true)
+    end
+
+    it "should compare the real part with num on left" do
+      cmp_result = 54 > dual
+      cmp_result.must_equal(false)
+    end
+
   end
 
 end

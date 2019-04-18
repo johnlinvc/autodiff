@@ -91,4 +91,18 @@ class AutodiffTest < Minitest::Test
     actual = Autodiff.gradient([20, 30]) {|x,y| 10.times.reduce(0){|acc, n| acc + 2 * x + 3 * y} }
     assert_equal [20,30], actual
   end
+
+  def test_it_can_handle_triop
+    actual = Autodiff.gradient(40) { |x|
+      x > 42 ? 2 * x : x
+    }
+    assert_equal 1, actual
+  end
+
+  def test_it_can_handle_triop
+    actual = Autodiff.gradient(50) { |x|
+      x > 42 ? 2 * x : x
+    }
+    assert_equal 2, actual
+  end
 end
